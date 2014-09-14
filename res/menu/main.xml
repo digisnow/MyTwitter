@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_menu_refresh"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/menu_refresh"/>
+    <item
+        android:id="@+id/menu_tweet"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:orderInCategory="200"
+        android:showAsAction="always"
+        android:title="@string/menu_tweet"/>
+    <item
+        android:id="@+id/tweet_form_set"
+        android:icon="@android:drawable/ic_menu_save"
+        android:orderInCategory="200"
+        android:showAsAction="always"
+        android:title="@string/tweet_form_set"/>
+    <item
+        android:id="@+id/tweet_form"
+        android:icon="@android:drawable/sym_action_chat"
+        android:orderInCategory="200"
+        android:showAsAction="always"
+        android:title="@string/tweet_form"/>
+
+</menu>

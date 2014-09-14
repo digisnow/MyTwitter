@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Myてすたー</string>
+    <string name="action_settings">設定</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="twitter_oauth">Twitter認証</string>
+    <string name="twitter_consumer_key">smlVBODJDZp5pQwCS77qFxsRv</string>
+    <string name="twitter_consumer_secret">yBPjZXfl91keNgtECFoiLGJWWuJ94zc2TfE1p9EUQexBKkpKlW</string>
+    <string name="twitter_callback_url">digisnow://twitter</string>
+    <string name="menu_refresh">更新</string>
+    <string name="menu_tweet">つぶやく</string>
+    <string name="tweet_form">定型文つぶやき</string>
+    <string name="tweet_form_set">定型文設定</string>
+    <string name="tweet_edit">登録</string>
+    <string name="back">戻る</string>
+    <string name="delete">削除</string>
+    <string name="check">確認</string>
+    
+    <string-array name="string_array">
+        <item>返信！</item>
+        <item>リツイート</item>
+        <item>ふぁぼる</item>
+        <item>RT</item>
+        <item>ユーザ</item>
+    </string-array>
+
+</resources>
