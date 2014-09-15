@@ -132,14 +132,14 @@ public class MainActivity extends ListActivity {
 		} else {
 			String[] items = new String[6];
 			int i= 0;
-			while(textForm[i] != null && textForm[i].length() != 0){
+			while(i < textForm.length && textForm[i].length() != 0 && textForm[i] != null){
 				items[i] = textForm[i];
 				i++;
 			}
-
 			for(i = 0; i < 6; i++){
 				if(items[i] == null)items[i] = "";
 			}
+			items[5] = "‚â‚Á‚Ï‚è‚â‚ß‚é";
 
 			new AlertDialog.Builder(MainActivity.this)
 			.setTitle("‚È‚É‚Â‚Ô‚â‚­H")
@@ -158,7 +158,7 @@ public class MainActivity extends ListActivity {
 	 * 
 	 */
 	private void selectList(int item) {
-		if(getTweetText()[item] == null || getTweetText()[item].length() == 0){
+		if(getTweetText()[item] == null || getTweetText()[item].length() == 0 || item == 5){
 			//nothing
 		} else {
 			tweet(getTweetText()[item]);

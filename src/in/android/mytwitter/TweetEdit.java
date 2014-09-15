@@ -58,23 +58,33 @@ public class TweetEdit extends Activity {
 		insertButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//•¶Žš—ñ‚ª“ü—Í‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^‚µ‚È‚¢
+				//•¶Žš—ñ‚ª“ü—Í‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Æ140Žš‚ð’´‚¦‚Ä‚¢‚éê‡‚Í“o˜^‚µ‚È‚¢
 				String edit = tweetEdit.getText().toString();
 				if(edit != null && edit.length() > 0 && edit.length() < 140){
-					//ƒf[ƒ^“o˜^
-					try {
-
-						//“o˜^ƒf[ƒ^Ý’è
-						ContentValues val = new ContentValues();
-						val.put("tweettext", edit);
-						val.put("tweetcount", "0");
-						val.put("tweettime", String.valueOf(System.currentTimeMillis()));
+					//“o˜^‚³‚ê‚Ä‚¢‚é’èŒ^•¶‚ðŽæ“¾
+					String textForm[] = getTweetText();
+					int i = 0;
+					for(int j = 0; j < 5; j++){
+						if(textForm[j] != null)i++;
+					}
+					if(i < 5) {
 						//ƒf[ƒ^“o˜^
-						db.insert("TWEETFORM", "‚È‚É‚©", val);
+						try {
 
-						showToast("u" + edit + "v" +"‚ð“o˜^‚µ‚Ü‚µ‚½I");
-					} catch(Exception e) {
-						showToast("ƒf[ƒ^‚Ì“o˜^‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
+							//“o˜^ƒf[ƒ^Ý’è
+							ContentValues val = new ContentValues();
+							val.put("tweettext", edit);
+							val.put("tweetcount", "0");
+							val.put("tweettime", String.valueOf(System.currentTimeMillis()));
+							//ƒf[ƒ^“o˜^
+							db.insert("TWEETFORM", "‚È‚É‚©", val);
+
+							showToast("u" + edit + "v" +"‚ð“o˜^‚µ‚Ü‚µ‚½I");
+						} catch(Exception e) {
+							showToast("ƒf[ƒ^‚Ì“o˜^‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
+						}
+					} else {
+						showToast("‚·‚Å‚É5‚Â“o˜^‚³‚ê‚Ä‚¢‚Ü‚·");
 					}
 				}else if(edit.length() > 140) {
 					showToast("140ŽšˆÈ“à‚É‚µ‚Ä‚­‚¾‚³‚¢");
@@ -97,7 +107,7 @@ public class TweetEdit extends Activity {
 				} else {
 					String[] items = new String[6];
 					int i= 0;
-					while(textForm[i] != null && textForm[i].length() != 0){
+					while(i < textForm.length && textForm[i].length() != 0 && textForm[i] != null){
 						items[i] = textForm[i];
 						i++;
 					}
@@ -141,7 +151,7 @@ public class TweetEdit extends Activity {
 				} else {
 					String[] items = new String[6];
 					int i= 0;
-					while(textForm[i] != null && textForm[i].length() != 0){
+					while(i < textForm.length && textForm[i].length() != 0 && textForm[i] != null){
 						items[i] = textForm[i];
 						i++;
 					}
