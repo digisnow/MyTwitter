@@ -16,7 +16,7 @@
     <string name="back">戻る</string>
     <string name="delete">削除</string>
     <string name="check">確認</string>
-    
+
     <string-array name="string_array">
         <item>返信！</item>
         <item>リツイート</item>

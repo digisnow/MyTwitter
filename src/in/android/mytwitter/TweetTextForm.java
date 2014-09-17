@@ -6,32 +6,32 @@
 package in.android.mytwitter;
 
 public class TweetTextForm {
-	//private int _id;
-	private String tweetText;
-	private String tweetCount;
-	private String tweetTime;
-	
-	public TweetTextForm(String tweetText, String tweetCount, String tweetTime){
-		//this._id = _id;
-		this.tweetText = tweetText;
-		this.tweetCount = tweetCount;
-		this.tweetTime = tweetTime;
-	}
+    //private int _id;
+    private String tweetText;
+    private String tweetCount;
+    private String tweetTime;
 
-//	public int get_id() {
-//		return _id;
-//	}
+    public TweetTextForm(String tweetText, String tweetCount, String tweetTime){
+        //this._id = _id;
+        this.tweetText = tweetText;
+        this.tweetCount = tweetCount;
+        this.tweetTime = tweetTime;
+    }
 
-	public String getTweetText() {
-		return tweetText;
-	}
+    //	public int get_id() {
+    //		return _id;
+    //	}
 
-	public String getTweetCount() {
-		return tweetCount;
-	}
+    public String getTweetText() {
+        return tweetText;
+    }
 
-	public String getTweetTime() {
-		return tweetTime;
-	}
+    public String getTweetCount() {
+        return tweetCount;
+    }
+
+    public String getTweetTime() {
+        return tweetTime;
+    }
 
 }
