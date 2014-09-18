@@ -9,6 +9,7 @@
 package in.android.mytwitter;
 
 import static in.android.mytwitter.Constants.*;
+import static in.android.mytwitter.ConstantMessages.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class MainActivity extends ListActivity {
             //更新ボタン
             reloadTimeLine();
             //課題：このままだと取得できない場合も表示される
-            showToast("タイムラインを取得しました");
+            showToast(GET_TIMELINE);
             return true;
         case R.id.menu_tweet:
             //ツイート画面へ
@@ -130,7 +131,7 @@ public class MainActivity extends ListActivity {
         String textForm[] = getTweetText();
         if(textForm[0] == null) {
             //なにも登録されていない場合
-            showToast("定型文が登録されていません。");
+            showToast(NO_ENTRY_TEXTFORM);
         } else {
             String[] items = new String[TEXTFORM_MAX + 1];
             int i= 0;
@@ -141,10 +142,10 @@ public class MainActivity extends ListActivity {
             for(i = 0; i < TEXTFORM_MAX + 1; i++){
                 if(items[i] == null)items[i] = "";
             }
-            items[5] = "やっぱりやめる";
+            items[5] = NOT_ACTION;
 
             new AlertDialog.Builder(MainActivity.this)
-            .setTitle("なにつぶやく？")
+            .setTitle(SELECT_TWEET)
             .setItems(items, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
                     selectList(item);
@@ -292,10 +293,10 @@ public class MainActivity extends ListActivity {
             @Override
             protected void onPostExecute(Boolean result) {
                 if(result) {
-                    showToast("ツイートが完了しました！");
+                    showToast(COMPLETE_TWEET);
                     reloadTimeLine();
                 } else {
-                    showToast("ツイートに失敗しました。。。");
+                    showToast(MISSING_TWEET);
                 }
             }
         };
@@ -326,7 +327,7 @@ public class MainActivity extends ListActivity {
                     }
                     getListView().setSelection(0);
                 } else {
-                    showToast("タイムラインの取得に失敗しました。。。");
+                    showToast(MISSING_GET_TIMELINE);
                 }
             }
         };

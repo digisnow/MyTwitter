@@ -7,6 +7,7 @@
 package in.android.mytwitter;
 
 import static in.android.mytwitter.Constants.*;
+import static in.android.mytwitter.ConstantMessages.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,17 +82,17 @@ public class TweetEdit extends Activity {
                             //ÉfÅ[É^ìoò^
                             db.insert("TWEETFORM", "Ç»Ç…Ç©", val);
 
-                            showToast("Åu" + edit + "Åv" +"Çìoò^ÇµÇ‹ÇµÇΩÅI");
+                            showToast(COMPLETE_ENTRY);
                         } catch(Exception e) {
-                            showToast("ÉfÅ[É^ÇÃìoò^Ç…é∏îsÇµÇ‹ÇµÇΩ");
+                            showToast(MISSING_ENTRY);
                         }
                     } else {
-                        showToast("Ç∑Ç≈Ç…5Ç¬ìoò^Ç≥ÇÍÇƒÇ¢Ç‹Ç∑");
+                        showToast(OVER_TEXTFORM_MAX);
                     }
                 }else if(edit.length() > TWEET_MAX_LENGTH) {
-                    showToast("140éöà»ì‡Ç…ÇµÇƒÇ≠ÇæÇ≥Ç¢");
+                    showToast(OVER_TWEET_COUNT);
                 } else {
-                    showToast("ìoò^ÇµÇΩÇ¢ï∂éöÇì¸óÕÇµÇƒÇ≠ÇæÇ≥Ç¢");
+                    showToast(PLESE_INPUT_TEXT);
                 }
             }
         });
@@ -105,7 +106,7 @@ public class TweetEdit extends Activity {
                 String textForm[] = getTweetText();
                 if(textForm[0] == null) {
                     //Ç»Ç…Ç‡ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
-                    showToast("íËå^ï∂Ç™ìoò^Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒÅB");
+                    showToast(NO_ENTRY_TEXTFORM);
                 } else {
                     String[] items = new String[TEXTFORM_MAX + 1];
                     int i= 0;
@@ -119,7 +120,7 @@ public class TweetEdit extends Activity {
                     }
 
                     new AlertDialog.Builder(TweetEdit.this)
-                    .setTitle("Ç«ÇÍÇè¡Ç∑ÅH")
+                    .setTitle(SELECT_DELETE)
                     .setItems(items, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int item) {
                             if(getTweetText()[item] == null || getTweetText()[item].length() == 0){
@@ -129,7 +130,7 @@ public class TweetEdit extends Activity {
                                 db.delete( "TWEETFORM", 
                                         "tweettext = ?",
                                         new String[]{ "" + getTweetText()[item] } );
-                                showToast("çÌèúÇµÇΩÇÊÅI");
+                                showToast(COMPLETE_DELETE);
                             }
                         }
                     }).show();
@@ -149,7 +150,7 @@ public class TweetEdit extends Activity {
                 String textForm[] = getTweetText();
                 if(textForm[0] == null) {
                     //Ç»Ç…Ç‡ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
-                    showToast("íËå^ï∂Ç™ìoò^Ç≥ÇÍÇƒÇ¢Ç‹ÇπÇÒÅB");
+                    showToast(NO_ENTRY_TEXTFORM);
                 } else {
                     String[] items = new String[TEXTFORM_MAX + 1];
                     int i= 0;

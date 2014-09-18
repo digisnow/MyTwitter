@@ -6,6 +6,7 @@
 package in.android.mytwitter;
 
 import static in.android.mytwitter.Constants.*;
+import static in.android.mytwitter.ConstantMessages.*;
 
 import java.io.File;
 
@@ -76,7 +77,7 @@ public class TweetActivity extends Activity {
         //投稿内容
         mInputText = new EditText(this);
         InputFilter[] filter = new InputFilter[1];
-        mInputText.setHint("いまなにしてる？");
+        mInputText.setHint(WHAT_DO_YOU_DO);
         filter[0] = new InputFilter.LengthFilter(TWEET_MAX_LENGTH);
         mInputText.setFilters(filter);
         mInputText.addTextChangedListener(new TweetTextWatcher());
@@ -94,17 +95,17 @@ public class TweetActivity extends Activity {
 
         //戻るボタン
         backButton = new Button(this);
-        backButton.setText("戻る");
+        backButton.setText(BACK);
         layout.addView(backButton,  new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 
         //画像添付ボタン
         pictButton = new Button(this);
-        pictButton.setText("画像");
+        pictButton.setText(PICTURE);
         layout.addView(pictButton,  new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 
         //Tweetボタン
         tweetButton = new Button(this);
-        tweetButton.setText("つぶやく");
+        tweetButton.setText(TWEET);
         layout.addView(tweetButton,  new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
 
 
@@ -181,10 +182,10 @@ public class TweetActivity extends Activity {
             @Override
             protected void onPostExecute(Boolean result) {
                 if(result) {
-                    showToast("ツイートが完了しました！");
+                    showToast(COMPLETE_TWEET);
                     finish();
                 } else {
-                    showToast("ツイートに失敗しました。。。");
+                    showToast(MISSING_TWEET);
                 }
             }
         };
