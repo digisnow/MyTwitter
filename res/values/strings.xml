@@ -9,6 +9,7 @@
     <string name="twitter_consumer_secret">yBPjZXfl91keNgtECFoiLGJWWuJ94zc2TfE1p9EUQexBKkpKlW</string>
     <string name="twitter_callback_url">digisnow://twitter</string>
     <string name="menu_refresh">更新</string>
+    <string name="menu_more">もっと更新</string>
     <string name="menu_tweet">つぶやく</string>
     <string name="tweet_form">定型文つぶやき</string>
     <string name="tweet_form_set">定型文設定</string>

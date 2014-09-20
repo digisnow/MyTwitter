@@ -14,6 +14,7 @@ import static in.android.mytwitter.ConstantMessages.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import twitter4j.Paging;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import android.app.AlertDialog;
@@ -35,6 +36,10 @@ public class MainActivity extends ListActivity {
     private Twitter mTwitter;
 
     //private int selectPos;
+    /** 一回で取得するタイムラインの数　デフォルトでは100とする */
+    private final int ntimeline = 200;
+    /** 現在のページ数  デフォルトでは1から*/
+    private int page = 1;
 
 
 
@@ -54,7 +59,7 @@ public class MainActivity extends ListActivity {
             setListAdapter(mAdapter);
 
             mTwitter = TwitterUtils.getTwitterInstance(this);
-            reloadTimeLine();
+            reloadTimeLine(page);
         }
     }
 
@@ -73,9 +78,13 @@ public class MainActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        case R.id.menu_more:
+            //さらにTLの取得
+            page++;
+            reloadTimeLine(page);
         case R.id.menu_refresh:
             //更新ボタン
-            reloadTimeLine();
+            reloadTimeLine(page);
             //課題：このままだと取得できない場合も表示される
             showToast(GET_TIMELINE);
             return true;
@@ -142,7 +151,7 @@ public class MainActivity extends ListActivity {
             for(i = 0; i < TEXTFORM_MAX + 1; i++){
                 if(items[i] == null)items[i] = "";
             }
-            items[5] = NOT_ACTION;
+            items[TEXTFORM_MAX] = NOT_ACTION;
 
             new AlertDialog.Builder(MainActivity.this)
             .setTitle(SELECT_TWEET)
@@ -178,101 +187,101 @@ public class MainActivity extends ListActivity {
      * @param id 
      */
 
-    //  ふぁぼとかりついーととかそのあたりの動き
-    //  とりあえず後回し
-    //	@Override
-    //	protected void onListItemClick(ListView l, View v, int position, long id){
-    //
-    //		selectPos = position;
-    //
-    //		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    //		builder.setIcon(R.drawable.icon)
-    //		.setTitle("Select Your Action")
-    //		.setMessage("ついーと内容")
-    //		.setItems(R.string.string_array, new DialogInterface.OnClickListener() {
-    //
-    //			/**
-    //			 * ダイアログのアイテムがクリックされた時の処理
-    //			 * @param dialog
-    //			 * @param which どのアイテムがクリックされたか
-    //			 */
-    //			public void onClick(DialogInterface dialog, int which) {
-    //
-    //				dialog.dismiss();
-    //
-    //				Intent intent = null;
-    //				Status status = tl.get(selectPos);
-    //				String screenName 	= status.getUser().getScreenName();
-    //				String text 		= status.getText();
-    //				long userId			= status.getUser().getId();
-    //				long statusId 		= status.getId();
-    //
-    //				switch(which){
-    //				case 0:	//Reply
-    //					intent = new Intent(MainActivity.this, TweetActivity.class);
-    //					intent.putExtra("mode",			"Reply");
-    //					intent.putExtra("statusId", 	statusId);
-    //					intent.putExtra("screenName", 	screenName);
-    //					intent.putExtra("text", 		text);
-    //					Log.v("test", Long.toString(statusId));
-    //					Log.v("test", screenName);
-    //					startActivity(intent);
-    //					break;
-    //				case 1:	//Retweet
-    //					intent = new Intent(MainActivity.this, TweetActivity.class);
-    //					intent.putExtra("mode",			"Retweet");
-    //					intent.putExtra("statusId", 	statusId);
-    //					intent.putExtra("screenName", 	screenName);
-    //					intent.putExtra("text", 		text);
-    //					Log.v("test", Long.toString(statusId));
-    //					Log.v("test", screenName);
-    //					startActivity(intent);
-    //					break;
-    //				case 2: //fav
-    //					MainActivity dtl = MainActivity.this;
-    //					TwitterApplication app = (TwitterApplication)dtl.getApplication();
-    //					Twitter twitter = app.getTwitter();
-    //					try{	
-    //						twitter.createFavorite(statusId);
-    //					}catch(TwitterException e){
-    //						e.printStackTrace();
-    //						new AlertDialog.Builder(dtl).setTitle("Error").setMessage("Favorite error").create().show();
-    //					}
-    //					break;
-    //				case 3:	//profile
-    //
-    //					int following = status.getUser().getFriendsCount();
-    //					int followed  = status.getUser().getFollowersCount();
-    //					String url = status.getUser().getProfileImageURL().toString();
-    //					String place = status.getUser().getLocation();
-    //					String bio = status.getUser().getDescription();
-    //					String fullname = status.getUser().getName();
-    //
-    //					intent = new Intent(MainActivity.this, ProfileActivity.class);
-    //					intent.putExtra("userId", userId);
-    //					intent.putExtra("screenName", screenName);
-    //					intent.putExtra("fullname", fullname);
-    //					intent.putExtra("following", following);
-    //					intent.putExtra("followed", followed);
-    //					intent.putExtra("url", url);
-    //					intent.putExtra("place", place);
-    //					intent.putExtra("bio", bio);
-    //
-    //					startActivity(intent);
-    //					break;
-    //				default:	//other(cancel)
-    //					dialog.cancel();
-    //					break;
-    //				}
-    //
-    //			}
-    //		});
-    //
-    //		builder.create().show();
-    //
-    //	}
-
-
+//    ふぁぼとかりついーととかそのあたりの動き
+//    とりあえず後回し
+//    @Override
+//    protected void onListItemClick(ListView l, View v, int position, long id){
+//
+//        selectPos = position;
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setIcon(R.drawable.icon)
+//        .setTitle("Select Your Action")
+//        .setMessage("ついーと内容")
+//        .setItems(R.string.string_array, new DialogInterface.OnClickListener() {
+//
+//            /**
+//             * ダイアログのアイテムがクリックされた時の処理
+//             * @param dialog
+//             * @param which どのアイテムがクリックされたか
+//             */
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                dialog.dismiss();
+//
+//                Intent intent = null;
+//                Status status = tl.get(selectPos);
+//                String screenName 	= status.getUser().getScreenName();
+//                String text 		= status.getText();
+//                long userId			= status.getUser().getId();
+//                long statusId 		= status.getId();
+//
+//                switch(which){
+//                case 0:	//Reply
+//                    intent = new Intent(MainActivity.this, TweetActivity.class);
+//                    intent.putExtra("mode",			"Reply");
+//                    intent.putExtra("statusId", 	statusId);
+//                    intent.putExtra("screenName", 	screenName);
+//                    intent.putExtra("text", 		text);
+//                    Log.v("test", Long.toString(statusId));
+//                    Log.v("test", screenName);
+//                    startActivity(intent);
+//                    break;
+//                case 1:	//Retweet
+//                    intent = new Intent(MainActivity.this, TweetActivity.class);
+//                    intent.putExtra("mode",			"Retweet");
+//                    intent.putExtra("statusId", 	statusId);
+//                    intent.putExtra("screenName", 	screenName);
+//                    intent.putExtra("text", 		text);
+//                    Log.v("test", Long.toString(statusId));
+//                    Log.v("test", screenName);
+//                    startActivity(intent);
+//                    break;
+//                case 2: //fav
+//                    MainActivity dtl = MainActivity.this;
+//                    TwitterApplication app = (TwitterApplication)dtl.getApplication();
+//                    Twitter twitter = app.getTwitter();
+//                    try{	
+//                        twitter.createFavorite(statusId);
+//                    }catch(TwitterException e){
+//                        e.printStackTrace();
+//                        new AlertDialog.Builder(dtl).setTitle("Error").setMessage("Favorite error").create().show();
+//                    }
+//                    break;
+//                case 3:	//profile
+//
+//                    int following = status.getUser().getFriendsCount();
+//                    int followed  = status.getUser().getFollowersCount();
+//                    String url = status.getUser().getProfileImageURL().toString();
+//                    String place = status.getUser().getLocation();
+//                    String bio = status.getUser().getDescription();
+//                    String fullname = status.getUser().getName();
+//
+//                    intent = new Intent(MainActivity.this, ProfileActivity.class);
+//                    intent.putExtra("userId", userId);
+//                    intent.putExtra("screenName", screenName);
+//                    intent.putExtra("fullname", fullname);
+//                    intent.putExtra("following", following);
+//                    intent.putExtra("followed", followed);
+//                    intent.putExtra("url", url);
+//                    intent.putExtra("place", place);
+//                    intent.putExtra("bio", bio);
+//
+//                    startActivity(intent);
+//                    break;
+//                default:	//other(cancel)
+//                    dialog.cancel();
+//                    break;
+//                }
+//
+//            }
+//        });
+//
+//        builder.create().show();
+//
+//    }
+//
+//
     /**
      * ツイートするメソッド
      * @param tweet_form つぶやくテキスト
@@ -294,7 +303,7 @@ public class MainActivity extends ListActivity {
             protected void onPostExecute(Boolean result) {
                 if(result) {
                     showToast(COMPLETE_TWEET);
-                    reloadTimeLine();
+                    reloadTimeLine(page);
                 } else {
                     showToast(MISSING_TWEET);
                 }
@@ -306,12 +315,13 @@ public class MainActivity extends ListActivity {
     /**
      * タイムラインの更新
      */
-    private void reloadTimeLine() {
+    private void reloadTimeLine(int page) {
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new AsyncTask<Void, Void, List<twitter4j.Status>>() {
+            Paging p = new Paging(1, ntimeline);
             @Override
             protected List<twitter4j.Status> doInBackground(Void... params) {
                 try {
-                    return mTwitter.getHomeTimeline();
+                    return mTwitter.getHomeTimeline(p);
                 } catch (TwitterException e) {
                     e.printStackTrace();
                 }
@@ -333,6 +343,7 @@ public class MainActivity extends ListActivity {
         };
         task.execute();
     }
+
 
     /**
      * ダイアログ
