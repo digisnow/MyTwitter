@@ -108,9 +108,9 @@ public class TweetEdit extends Activity {
                     //Ç»Ç…Ç‡ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
                     showToast(NO_ENTRY_TEXTFORM);
                 } else {
-                    String[] items = new String[TEXTFORM_MAX + 1];
-                    int i= 0;
-                    while(i < textForm.length && textForm[i].length() != 0 && textForm[i] != null){
+                    String[] items = new String[TEXTFORM_MAX];
+                    int i = 0;
+                    while(i < textForm.length && textForm[i] != null && textForm[i].length() != 0){
                         items[i] = textForm[i];
                         i++;
                     }
@@ -152,9 +152,9 @@ public class TweetEdit extends Activity {
                     //Ç»Ç…Ç‡ìoò^Ç≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
                     showToast(NO_ENTRY_TEXTFORM);
                 } else {
-                    String[] items = new String[TEXTFORM_MAX + 1];
-                    int i= 0;
-                    while(i < textForm.length && textForm[i].length() != 0 && textForm[i] != null){
+                    String[] items = new String[TEXTFORM_MAX];
+                    int i = 0;
+                    while(i < textForm.length && textForm[i] != null && textForm[i].length() != 0){
                         items[i] = textForm[i];
                         i++;
                     }

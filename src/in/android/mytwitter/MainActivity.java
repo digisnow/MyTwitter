@@ -144,11 +144,11 @@ public class MainActivity extends ListActivity {
         } else {
             String[] items = new String[TEXTFORM_MAX + 1];
             int i= 0;
-            while(i < textForm.length && textForm[i].length() != 0 && textForm[i] != null){
+            while(i < textForm.length && textForm[i] != null && textForm[i].length() != 0){
                 items[i] = textForm[i];
                 i++;
             }
-            for(i = 0; i < TEXTFORM_MAX + 1; i++){
+            for(i = 0; i < TEXTFORM_MAX; i++){
                 if(items[i] == null)items[i] = "";
             }
             items[TEXTFORM_MAX] = NOT_ACTION;
